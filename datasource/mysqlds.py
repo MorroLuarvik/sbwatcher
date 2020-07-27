@@ -29,6 +29,7 @@ class MySQL(AbstractDatasource):
 
 		if connector.__name__ != 'mysql.connector':
 			params["passwd"] = password
+			del(params["password"])
 
 		self.connect = connector.connect(**params)
 
