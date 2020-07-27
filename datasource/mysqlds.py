@@ -58,7 +58,10 @@ class MySQL(AbstractDatasource):
 			ORDER BY region_code, rate_category_id;
 		""" % (disabled)
 
-		cursor = self.connect.cursor(dictionary = True)
+		if connector.__name__ == 'mysql.connector':
+			cursor = self.connect.cursor(dictionary = True) #  dictionary = True
+		else:
+			cursor = self.connect.cursor(connector.cursors.DictCursor) #  dictionary = True
 
 		cursor.execute(query)
 		return cursor.fetchall()
