@@ -58,10 +58,10 @@ class MySQL(AbstractDatasource):
 			ORDER BY region_code, rate_category_id;
 		""" % (disabled)
 
-		if connector.__name__ == 'mysql.connector':
-			cursor = self.connect.cursor(dictionary = True) #  dictionary = True
-		else:
-			cursor = self.connect.cursor(connector.cursors.DictCursor) #  dictionary = True
+		try:
+			cursor = self.connect.cursor(dictionary = True)
+		except TypeError:
+			cursor = self.connect.cursor(connector.cursors.DictCursor)
 
 		cursor.execute(query)
 		return cursor.fetchall()
@@ -89,5 +89,9 @@ class MySQL(AbstractDatasource):
 	# ----------------------------- реализация функций абстрактного класса ----------------------------- #
 
 	def __del__(self):
-		if self.connect.is_connected():
+		try:
+			is_connected = self.connect.is_connected()
+		except AttributeError:
+			is_connected = self.connect.ping(True)
+		if is_connected:
 			self.connect.close()
