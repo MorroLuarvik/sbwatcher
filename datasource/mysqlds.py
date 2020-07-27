@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 #-*-coding:utf-8-*-
+""" Модуль источника данных MySQL """
 
 from .abstractdatasource import AbstractDatasource
 try:

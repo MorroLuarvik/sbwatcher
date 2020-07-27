@@ -1,1 +1,1 @@
-from .requests import RequestManager
+from .manager import Manager
