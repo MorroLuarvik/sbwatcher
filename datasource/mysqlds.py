@@ -2,7 +2,12 @@
 #-*-coding:utf-8-*-
 
 from .abstractdatasource import AbstractDatasource
-from mysql import connector
+try:
+	# normal system
+	from mysql import connector as connector
+except ImportError:
+	# reduced system
+	from MySQLdb import MySQLdb as connector
 import misc
 
 class MySQL(AbstractDatasource):
