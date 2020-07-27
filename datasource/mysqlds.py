@@ -17,14 +17,20 @@ class MySQL(AbstractDatasource):
 
 	def __init__(self, host = None, db = None, user = None, password = None, port = 3306):
 		""" инициализация источника данных """
-		self.connect = connector.connect(
-			host = host,
-			user = user,
-			password = password,
-			db = db,
-			port = port,
-			charset = 'utf8',
-			use_unicode = True)
+		params = {
+			"host": host,
+			"user": user,
+			"password": password,
+			"db": db,
+			"port": port,
+			"charset": 'utf8',
+			"use_unicode": True
+		}
+
+		if connector.__name__ != 'mysql.connector':
+			params["passwd"] = password
+
+		self.connect = connector.connect(**params)
 
 	# ----------------------------- реализация функций абстрактного класса ----------------------------- #
 	def get_active_finances(self, disabled = 0):
