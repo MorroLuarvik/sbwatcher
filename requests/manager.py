@@ -21,7 +21,7 @@ class Manager:
         region_code = fins[0]["region_code"]
         rate_category_code = fins[0]["rate_category_code"]
 
-        return self.interface.get_request(0, region_code, rate_category_code, [fin['curr_code'] for fin in fins ])
+        return self.interface.get_request(0, region_code, rate_category_code, [ fin['curr_code'] for fin in fins ])
         # ============ TODO temporary solution ============ #
 
     def set_response_data(self, req_id, data):

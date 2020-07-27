@@ -4,14 +4,12 @@
 
 import init
 
-#from requests import Requests
+dr = {
+    "a": "aa", 
+    "b": "bb",
+    "c": "xx"
+}
 
-#rr = Requests()
-#print(rr.get_requests())
+row = {"a": 4, "b": -32, 'z': 42 }
 
-a = "12"
-b = "3423"
-cc  = {2: 5, "lol": a}
-
-for idx in cc.keys():
-    print(idx)
+print( {dr[key]: row[key] for key in dr.keys() if key in row.keys()} )
