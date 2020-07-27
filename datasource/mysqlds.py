@@ -22,7 +22,7 @@ class MySQL(AbstractDatasource):
 			use_unicode = True)
 
 	# ----------------------------- реализация функций абстрактного класса ----------------------------- #
-	def get_active_finances(self, **where):
+	def get_active_finances(self, disabled = 0):
 		""" получение списка активных финансов """
 		query = """
 			SELECT 
@@ -42,8 +42,9 @@ class MySQL(AbstractDatasource):
 			INNER JOIN
 				s_currencys AS C ON C.curr_id = F.curr_id
 			WHERE
-				F.disabled = %s;
-		""" % self._construct_where_conditions(**where)
+				F.disabled = %s
+			ORDER BY region_code, rate_category_id;
+		""" % (disabled)
 
 		cursor = self.connect.cursor(dictionary = True)
 

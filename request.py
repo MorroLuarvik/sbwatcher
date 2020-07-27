@@ -2,6 +2,8 @@
 #-*-coding:utf-8-*-
 """ Модуль получения запросов с внешнего мира """
 
+import init
+
 import json
 import http.client
 
