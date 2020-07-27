@@ -8,3 +8,9 @@ from requests import Requests
 
 rr = Requests()
 print(rr.get_requests())
+
+a = "12"
+b = "3423"
+cc  = [2, 5, "lol"]
+
+print([a, b] + cc)
