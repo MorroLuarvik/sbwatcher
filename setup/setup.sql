@@ -1,9 +1,9 @@
 
 USE `sbwatcher`;
 
-/*--------------------------------
--- географические регионы       --
---------------------------------*/
+/*********************************
+** географические регионы       **
+*********************************/
 DROP TABLE IF EXISTS  `sbwatcher`.`s_regions`;
 CREATE TABLE `sbwatcher`.`s_regions` (
     `region_id`  int unsigned NOT NULL primary key AUTO_INCREMENT,
@@ -17,9 +17,9 @@ CREATE TABLE `sbwatcher`.`s_regions` (
 INSERT INTO `sbwatcher`.`s_regions` (`region_code`, `region_name`)
 VALUES ('27', 'Хабаровский край');
 
-/*--------------------------------
--- типы обменов                 --
---------------------------------*/
+/*********************************
+** типы обменов                 **
+*********************************/
 DROP TABLE IF EXISTS  `sbwatcher`.`s_rate_categorys`;
 CREATE TABLE `sbwatcher`.`s_rate_categorys` (
     `rate_category_id`  int unsigned NOT NULL primary key AUTO_INCREMENT,
@@ -33,9 +33,9 @@ CREATE TABLE `sbwatcher`.`s_rate_categorys` (
 INSERT INTO `sbwatcher`.`s_rate_categorys` (`rate_category_code`, `rate_category_name`)
 VALUES ('beznal', 'Для дистанционных каналов');
 
-/*--------------------------------
--- валюты                       --
---------------------------------*/
+/*********************************
+** валюты                       **
+*********************************/
 DROP TABLE IF EXISTS  `sbwatcher`.`s_currencys`;
 CREATE TABLE `sbwatcher`.`s_currencys` (
     `curr_id`  int unsigned NOT NULL primary key AUTO_INCREMENT,
@@ -54,9 +54,9 @@ VALUES
     ('A99', 'Silver', 'Серебро'),
     ('A33', 'palladium', 'Палладий');
 
-/*--------------------------------
--- отслеживаемые финансы        --
---------------------------------*/
+/*********************************
+** отслеживаемые финансы        **
+*********************************/
 DROP TABLE IF EXISTS  `sbwatcher`.`f_finances`;
 CREATE TABLE `sbwatcher`.`f_finances` (
     `fin_id`  int unsigned NOT NULL primary key AUTO_INCREMENT,
@@ -78,9 +78,9 @@ VALUES
     (1, 1, 2),
     (1, 1, 3);
 
-/*--------------------------------
--- логи курсов                  --
---------------------------------*/
+/*********************************
+** логи курсов                  **
+*********************************/
 DROP TABLE IF EXISTS  `sbwatcher`.`f_rates`;
 CREATE TABLE `sbwatcher`.`f_rates` (
     `record_id`  int unsigned NOT NULL primary key AUTO_INCREMENT,
@@ -96,14 +96,14 @@ CREATE TABLE `sbwatcher`.`f_rates` (
     KEY `event_ts_idx` (`event_ts`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*--------------------------------
--- пользователи системы         --
---------------------------------*/
+/*********************************
+** пользователи системы         **
+*********************************/
 DROP TABLE IF EXISTS  `sbwatcher`.`u_users`;
 CREATE TABLE `sbwatcher`.`u_users` (
     `user_id`  int unsigned NOT NULL primary key AUTO_INCREMENT,
-    `user_email` VARCHAR (256) NOT NULL DEFAULT '',
-    `user_alias` VARCHAR (256),
+    `user_email` VARCHAR (255) NOT NULL DEFAULT '',
+    `user_alias` VARCHAR (255),
 
     UNIQUE KEY `user_email_idx` (`user_email`) USING BTREE,
     KEY `user_alias_idx` (`user_alias`) USING BTREE
@@ -112,9 +112,9 @@ CREATE TABLE `sbwatcher`.`u_users` (
 INSERT INTO `sbwatcher`.`u_users` (`user_email`, `user_alias`)
 VALUES ('dr.morro.l@gmail.com', 'Morro Luarvik');
 
-/*--------------------------------
--- финансы пользоватеелй        --
---------------------------------*/
+/*********************************
+** финансы пользоватеелй        **
+*********************************/
 DROP TABLE IF EXISTS  `sbwatcher`.`u_accounts`;
 CREATE TABLE `sbwatcher`.`u_accounts` (
     `account_id`  int unsigned NOT NULL primary key AUTO_INCREMENT,
