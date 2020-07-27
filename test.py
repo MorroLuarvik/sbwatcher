@@ -4,13 +4,14 @@
 
 import init
 
-from requests import Requests
+#from requests import Requests
 
-rr = Requests()
-print(rr.get_requests())
+#rr = Requests()
+#print(rr.get_requests())
 
 a = "12"
 b = "3423"
-cc  = [2, 5, "lol"]
+cc  = {2: 5, "lol": a}
 
-print([a, b] + cc)
+for idx in cc.keys():
+    print(idx)

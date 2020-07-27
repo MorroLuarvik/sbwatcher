@@ -14,40 +14,18 @@ https://www.sberbank.ru/portalserver/proxy/?pipe=shortCachePipe&url=http://local
 ```
 
 ```JavaScript
-{"beznal":
-    {"840":
-        {"0":
-            {"isoCur": "USD",
-            "currencyName":"Доллар США",
-            "currencyNameEng":"US Dollar",
-            "rateType":"CURRENCY",
-            "categoryCode":"beznal",
-            "scale":1,
-            "buyValue":69.89,
-            "sellValue":72.8,
-            "activeFrom":1595552241000,
-            "buyValuePrev":69.63,
-            "sellValuePrev":72.94,
-            "amountFrom":0,
-            "amountTo":9999999999.9899997711
-            }
-        },
-    "A99":
-        {"0":
-            {"isoCur":"Silver",
-            "currencyName":"Серебро",
-            "currencyNameEng":"Silver",
-            "rateType":"METAL",
-            "categoryCode":"beznal",
-            "scale":1,
-            "buyValue":49.6,
-            "sellValue":54.81,
-            "activeFrom":1595540118000,
-            "buyValuePrev":49.5,
-            "sellValuePrev":54.74,
-            "amountFrom":0,
-            "amountTo":9999999999.9899997711
-            }
+{'beznal': 
+    {'840': 
+        {'0': 
+            {'isoCur': 'USD', 'currencyName': 'Доллар США', 'currencyNameEng': 'US Dollar', 'rateType': 'CURRENCY', 'categoryCode': 'beznal', 'scale': 1, 'buyValue': 70.18, 'sellValue': 73.32, 'activeFrom': 1595809322000, 'buyValuePrev': 70.16, 'sellValuePrev': 73.18, 'amountFrom': 0, 'amountTo': 9999999999.99}
+        }, 
+    'A99': 
+        {'0': 
+            {'isoCur': 'Silver', 'currencyName': 'Серебро', 'currencyNameEng': 'Silver', 'rateType': 'METAL', 'categoryCode': 'beznal', 'scale': 1, 'buyValue': 52.98, 'sellValue': 57.98, 'activeFrom': 1595819707000, 'buyValuePrev': 51.98, 'sellValuePrev': 56.97, 'amountFrom': 0, 'amountTo': 9999999999.99}
+        }, 
+    'A33': 
+        {'0': 
+            {'isoCur': 'palladium', 'currencyName': 'Палладий', 'currencyNameEng': 'Palladium', 'rateType': 'METAL', 'categoryCode': 'beznal', 'scale': 1, 'buyValue': 4832, 'sellValue': 5459, 'activeFrom': 1595819707000, 'buyValuePrev': 4821, 'sellValuePrev': 5447, 'amountFrom': 0, 'amountTo': 9999999999.99}
         }
     }
 }
