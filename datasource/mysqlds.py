@@ -35,34 +35,33 @@ class MySQL(AbstractDatasource):
 		self.connect = connector.connect(**params)
 
 	# ----------------------------- реализация функций абстрактного класса ----------------------------- #
-	def get_active_finances(self, disabled = 0):
-		""" получение списка активных финансов """
+	def get_finances(self, **where):
+		""" получение данных об отслеживаемых финансах """
 		query = """
-			SELECT 
+			SELECT
 				F.fin_id,
 				F.region_id,
 				R.region_code,
+				R.region_name,
 				F.rate_category_id,
 				RC.rate_category_code,
+				RC.rate_category_name,
 				F.curr_id,
-				C.curr_code
-			FROM 
-				f_finances as F
-			INNER JOIN
-				s_regions AS R on R.region_id = F.region_id
-			INNER JOIN
-				s_rate_categorys AS RC ON RC.rate_category_id = F.rate_category_id
-			INNER JOIN
-				s_currencys AS C ON C.curr_id = F.curr_id
-			WHERE
-				F.disabled = %s
-			ORDER BY region_code, rate_category_id;
-		""" % (disabled)
+				C.curr_code,
+				C.curr_iso,
+				C.curr_name,
+				F.disabled
+			FROM f_finances as F
+			INNER JOIN s_regions AS R on R.region_id = F.region_id
+			INNER JOIN s_rate_categorys AS RC on RC.rate_category_id = F.rate_category_id
+			INNER JOIN s_currencys AS C on C.curr_id = F.curr_id
+			WHERE %s""" % self._construct_where_conditions(**where)
 
 		cursor = self._get_cursor()
 
 		cursor.execute(query)
 		return cursor.fetchall()
+
 
 	def _construct_where_conditions(self, **where):
 		""" сборка where условия SQL запроса """
@@ -73,6 +72,10 @@ class MySQL(AbstractDatasource):
 
 		ret_array = []
 		for key, val in where.items():
+			if isinstance(val, str):
+				ret_array.append("%s = '%s'" % (str(key) , str(val)))
+				continue
+
 			if misc.isIterable(val):
 				ret_array.append("%s in (%s)" % (str(key),  ", ".join(map(str, val))))
 				continue

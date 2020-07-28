@@ -17,6 +17,11 @@ class Sbrf:
         'activeFrom': 'event_ts'
     }
 
+    ds = None # datasource
+
+    def __init__(self, ds = None):
+        self.ds = ds
+
     def get_request(self, req_id = None, region_code = "27", rate_category_code = "beznal", curr_codes = []):
         """ получить структура запроса к серверу """
         # ============ TODO temporary solution ============ #
@@ -39,15 +44,12 @@ class Sbrf:
                     row = {"fin_id": self._get_fin_id(region_code, rate_category_code, curr_code)}
                     row.update( self._get_rate_row(data[rate_category_code][curr_code][idx]) )
                     ret.append(row)
-                    """
-                    self._save_rate(
-                            region_id, 
-                            curr_code,
-                            data[rate_category_code][curr_code][idx])"""
         return row
 
     def _get_fin_id(self, region_code, rate_category_code, curr_code):
         """ получить id финансов из текущей БД TODO """
+        return self.ds.get_finances(region_code = region_code, rate_category_code = rate_category_code, curr_code = curr_code)[0]['fin_id']
+
     
     def _get_rate_row(self, row_data = {}):
         """ приведение строки к виду БД """
@@ -55,5 +57,5 @@ class Sbrf:
 
 
     def _get_region_code_by_req(self, req_id):
-        """ возвращает id региона по номеру запроса """
+        """ возвращает code региона по номеру запроса """
         return '27'        

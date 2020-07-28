@@ -4,12 +4,8 @@
 
 import init
 
-dr = {
-    "a": "aa", 
-    "b": "bb",
-    "c": "xx"
-}
+from datasource import Datasource
+from interfaces import Sbrf
 
-row = {"a": 4, "b": -32, 'z': 42 }
-
-print( {dr[key]: row[key] for key in dr.keys() if key in row.keys()} )
+interface = Sbrf(Datasource())
+print(interface._get_fin_id(27, 'beznal', 840))
