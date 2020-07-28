@@ -34,12 +34,21 @@ class Manager:
 
     def _save_rates(self, req_id, rate_data):
         """ сохраняет полученные данные """
+        for rate_row in rate_data:
+            if not self._is_exists_rate(rate_row):
+                print("add")
+                print(rate_row)    
+
         print(rate_data)
-        if self._is_exists_rate(rate_data):
-            return False
+        #if self._is_exists_rate(rate_data):
+        #    return False
 
         return True
 
-    def _is_exists_rate(self, rate_data):
+    def _is_exists_rate(self, rate_row):
         """ проверяет наличие данного курса в истории """
-        pass
+        params = {}
+        for key in rate_row.keys():
+            params['RL.' + key] = rate_row[key]
+
+        return len(self.ds.get_rates(**params))

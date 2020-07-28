@@ -7,3 +7,7 @@ class AbstractDatasource:
 	def get_finances(self, **where):
 		""" Список отслеживаемых финансов """
 		raise NotImplementedError("Определите get_exchange в %s." % (self.__class__.__name__))
+	
+	def get_rates(self, **where):
+		""" получение истории обменов """
+		raise NotImplementedError("Определите get_exchange в %s." % (self.__class__.__name__))
