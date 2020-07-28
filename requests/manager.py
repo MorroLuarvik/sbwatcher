@@ -25,28 +25,21 @@ class Manager:
         # ============ TODO temporary solution ============ #
 
     def set_response_data(self, req_id, data):
-        for rate_category_code in data.keys():
-            for curr_code in data[rate_category_code].keys():
-                for idx in data[rate_category_code][curr_code]:
-                    self._save_rate( req_id, self.interface.decode_answer(req_id, data[rate_category_code][curr_code][idx]) )
-
-        print(req_id, data)
-        pass
+        """ сохраняет данные для указанного запроса """
+        self._save_rates( req_id, self.interface.decode_answer(req_id, data) )
 
     def set_response_error(self, req_id, error):
-        """ регистрируется ошибка при выполнении запроса *не реализовано* """
+        """ регистрируется ошибка при выполнении запроса *не реализовано* TODO """
         pass
 
-    def _save_rate(self, req_id, data):
+    def _save_rates(self, req_id, rate_data):
         """ сохраняет полученные данные """
-        if self._is_exists_rate(region_id, curr_code, rate_dict):
+        print(rate_data)
+        if self._is_exists_rate(rate_data):
             return False
 
         return True
 
-    def _is_exists_rate(self, region_id, curr_code, rate_dict):
+    def _is_exists_rate(self, rate_data):
         """ проверяет наличие данного курса в истории """
-
-    def _get_region_by_req(self, req_id):
-        """ возвращает id региона по номеру запроса """
-        return 1
+        pass

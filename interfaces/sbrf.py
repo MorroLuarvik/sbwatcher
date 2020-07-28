@@ -44,7 +44,7 @@ class Sbrf:
                     row = {"fin_id": self._get_fin_id(region_code, rate_category_code, curr_code)}
                     row.update( self._get_rate_row(data[rate_category_code][curr_code][idx]) )
                     ret.append(row)
-        return row
+        return ret
 
     def _get_fin_id(self, region_code, rate_category_code, curr_code):
         """ получить id финансов из текущей БД TODO """
@@ -53,7 +53,9 @@ class Sbrf:
     
     def _get_rate_row(self, row_data = {}):
         """ приведение строки к виду БД """
-        return { self.data_relations[key]: row_data[key] for key in self.data_relations.keys() if key in row_data.keys() }
+        ret = { self.data_relations[key]: row_data[key] for key in self.data_relations.keys() if key in row_data.keys() }
+        ret['event_ts'] = int(ret['event_ts'] / 1000)
+        return ret
 
 
     def _get_region_code_by_req(self, req_id):
