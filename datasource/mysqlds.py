@@ -88,7 +88,8 @@ class MySQL(AbstractDatasource):
 			INNER JOIN s_regions AS R ON R.region_id = F.region_id
 			INNER JOIN s_rate_categorys AS RC ON RC.rate_category_id = F.rate_category_id
 			INNER JOIN s_currencys AS C ON C.curr_id = F.curr_id
-			WHERE %s""" % self._construct_where_conditions(**where)
+			WHERE %s
+			ORDER BY fin_id, event_ts""" % self._construct_where_conditions(**where)
 
 		cursor = self._get_cursor()
 
