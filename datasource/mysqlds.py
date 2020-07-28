@@ -95,6 +95,24 @@ class MySQL(AbstractDatasource):
 		cursor.execute(query)
 		return cursor.fetchall()
 
+	def insert_rates(self, values):
+		""" добавление параметров в историю обменов """
+		query = """
+			INSERT INTO f_rates (%s)
+			VALUES %s """ % (self._construct_query_keys(values), self._construct_query_values(values))
+
+		cursor = self._get_cursor()
+
+		return cursor.execute(query)
+
+	def _construct_query_keys(self, values):
+		""" сборка ключей для функции insert """
+		return  ', '.join(values.keys())
+
+	def _construct_query_values(self, values):
+		""" сборка значений для функции insert TODO сделать вариант для множества строк"""
+		return '(' + ', '.join(str(item) for item in values.values()) + ')'
+
 	def _construct_where_conditions(self, **where):
 		""" сборка where условия SQL запроса """
 		if len(where) == 0:

@@ -11,3 +11,8 @@ class AbstractDatasource:
 	def get_rates(self, **where):
 		""" получение истории обменов """
 		raise NotImplementedError("Определите get_exchange в %s." % (self.__class__.__name__))
+
+	def insert_rates(self, *values):
+		""" добавление параметров в историю обменов """
+		raise NotImplementedError("Определите get_exchange в %s." % (self.__class__.__name__))
+
