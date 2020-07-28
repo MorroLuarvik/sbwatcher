@@ -59,10 +59,7 @@ class MySQL(AbstractDatasource):
 			ORDER BY region_code, rate_category_id;
 		""" % (disabled)
 
-		try:
-			cursor = self.connect.cursor(dictionary = True)
-		except TypeError:
-			cursor = self.connect.cursor(connector.cursors.DictCursor)
+		cursor = self._get_cursor()
 
 		cursor.execute(query)
 		return cursor.fetchall()
@@ -89,7 +86,16 @@ class MySQL(AbstractDatasource):
 		return " and ".join(ret_array)
 	# ----------------------------- реализация функций абстрактного класса ----------------------------- #
 
+	def _get_cursor(self):
+		""" получение курсовра """
+		try:
+			cursor = self.connect.cursor(dictionary = True)
+		except TypeError:
+			cursor = self.connect.cursor(connector.cursors.DictCursor)
+		return cursor
+
 	def __del__(self):
+		""" аз """
 		try:
 			is_connected = self.connect.is_connected()
 		except AttributeError:
