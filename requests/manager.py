@@ -36,7 +36,7 @@ class Manager:
 				""" сохраняет полученные данные """
 				for rate_row in rate_data:
 						if not self._is_exists_rate(rate_row):
-								self.ds.insert_rates(rate_row)
+							self.ds.insert_rates(rate_row)
 				return True
 
 		def _is_exists_rate(self, rate_row):
