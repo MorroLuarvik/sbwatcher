@@ -123,8 +123,11 @@ class MySQL(AbstractDatasource):
 
 		ret_array = []
 		for key, val in where.items():
+			compare_sign = '='
+			if ' ' in key:
+				[key, compare_sign] = key.split(' ')
 			if isinstance(val, str):
-				ret_array.append("%s = '%s'" % (str(key) , str(val)))
+				ret_array.append("%s %s '%s'" % (str(key), compare_sign,  str(val)))
 				continue
 
 			if misc.isIterable(val):
@@ -135,7 +138,7 @@ class MySQL(AbstractDatasource):
 				ret_array.append("%s is null" % str(key))
 				continue
 			
-			ret_array.append("%s = %s" % (str(key) , str(val)))
+			ret_array.append("%s %s %s" % (str(key), compare_sign, str(val)))
 		
 		return " and ".join(ret_array)
 	# ----------------------------- реализация функций абстрактного класса ----------------------------- #
