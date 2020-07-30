@@ -8,7 +8,7 @@ from datasource import Datasource
 ds = Datasource()
 
 if len(sys.argv) != 3:
-	print("Укажите fin_id и файл с исходниками торгов: \"update.py _fin_id_ _source_file_\"")
+	print("Укажите fin_id и файл с исходниками торгов: \"update.py fin_id source_file\"")
 	for row in ds.get_finances(disabled = 0):
 		print("{rate_category_name} \t{curr_name}: \t{fin_id}".format(**row))
 	quit()
