@@ -35,7 +35,7 @@ class MySQL(AbstractDatasource):
 		self.connect = connector.connect(**params)
 
 	# ----------------------------- реализация функций абстрактного класса ----------------------------- #
-	def get_finances(self, **where):
+	def get_finances(self, where = {}):
 		""" получение данных об отслеживаемых финансах """
 		query = """
 			SELECT
@@ -55,14 +55,14 @@ class MySQL(AbstractDatasource):
 			INNER JOIN s_regions AS R on R.region_id = F.region_id
 			INNER JOIN s_rate_categorys AS RC on RC.rate_category_id = F.rate_category_id
 			INNER JOIN s_currencys AS C on C.curr_id = F.curr_id
-			WHERE %s""" % self._construct_where_conditions(**where)
+			WHERE %s""" % self._construct_where_conditions(where)
 
 		cursor = self._get_cursor()
 
 		cursor.execute(query)
 		return cursor.fetchall()
 
-	def get_rates(self, **where):
+	def get_rates(self, where = {}):
 		""" получение истории обменов """
 		query = """
 			SELECT
@@ -89,12 +89,20 @@ class MySQL(AbstractDatasource):
 			INNER JOIN s_rate_categorys AS RC ON RC.rate_category_id = F.rate_category_id
 			INNER JOIN s_currencys AS C ON C.curr_id = F.curr_id
 			WHERE %s
-			ORDER BY fin_id, event_ts""" % self._construct_where_conditions(**where)
+			ORDER BY fin_id, event_ts""" % self._construct_where_conditions(where)
 
 		cursor = self._get_cursor()
 
 		cursor.execute(query)
 		return cursor.fetchall()
+	
+	def is_exists_rate(self, where = {}):
+		""" наличие записи в истории обменов """
+		params = {}
+		for key in where.keys():
+				params['RL.' + key] = where[key]
+
+		return len(self.get_rates(params))
 
 	def insert_rates(self, values):
 		""" добавление параметров в историю обменов """
@@ -114,12 +122,10 @@ class MySQL(AbstractDatasource):
 		""" сборка значений для функции insert TODO сделать вариант для множества строк"""
 		return '(' + ', '.join(str(item) for item in values.values()) + ')'
 
-	def _construct_where_conditions(self, **where):
+	def _construct_where_conditions(self, where = {}):
 		""" сборка where условия SQL запроса """
 		if len(where) == 0:
 			return " 1 = 1 "
-		if len(where) == 1 and list(where.values())[0] == None:
-			return " 0 = 0 "
 
 		ret_array = []
 		for key, val in where.items():

@@ -16,7 +16,7 @@ class Manager:
 
 		def get_requests(self):
 				""" возвращает массив с запросами """
-				fins = self.ds.get_finances(disabled = 0)
+				fins = self.ds.get_finances({'disabled =': 0})
 				# ============ TODO temporary solution ============ #
 				region_code = fins[0]["region_code"]
 				rate_category_code = fins[0]["rate_category_code"]
@@ -35,14 +35,16 @@ class Manager:
 		def _save_rates(self, req_id, rate_data):
 				""" сохраняет полученные данные """
 				for rate_row in rate_data:
-						if not self._is_exists_rate(rate_row):
+						if not self.ds.is_exists_rate(rate_row):
 							self.ds.insert_rates(rate_row)
 				return True
 
+		"""
 		def _is_exists_rate(self, rate_row):
-				""" проверяет наличие данного курса в истории """
+				проверяет наличие данного курса в истории
 				params = {}
 				for key in rate_row.keys():
 						params['RL.' + key] = rate_row[key]
 
-				return len(self.ds.get_rates(**params))
+				return len(self.ds.get_rates(params))
+		"""

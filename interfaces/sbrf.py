@@ -48,7 +48,7 @@ class Sbrf:
 
 	def _get_fin_id(self, region_code, rate_category_code, curr_code):
 		""" получить id финансов из текущей БД TODO """
-		return self.ds.get_finances(region_code = region_code, rate_category_code = rate_category_code, curr_code = curr_code)[0]['fin_id']
+		return self.ds.get_finances({'region_code =': region_code, 'rate_category_code =': rate_category_code, 'curr_code =': curr_code})[0]['fin_id']
 
 	
 	def _get_rate_row(self, row_data = {}):
