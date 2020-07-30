@@ -9,13 +9,13 @@ import http.client
 
 class HttpsRequestClient(AbstractRequestClient):
 	""" Абстрактный класс отправки запросов """
-	req_source = None
+	req_manager = None
 	request_params = None
 	connection = None
 
-	def __init__(self, req_source, request_params):
+	def __init__(self, req_manager, request_params):
 		""" инициализация объекта """
-		self.req_source = req_source
+		self.req_manager = req_manager
 		self.request_params = request_params
 
 	def init(self):
@@ -36,11 +36,11 @@ class HttpsRequestClient(AbstractRequestClient):
 
 	def save_response_data(self, response):
 		""" Сохранение ответа в источнике данных """
-		self.req_source.set_response_data(self.request_params["id"], json.loads(str(response.read(), 'utf-8')))
+		self.req_manager.set_response_data(self.request_params["id"], response)
 
 	def set_response_error(self, error):
 		""" Сохранение ошибки в источнике данных """
-		self.req_source.set_response_error(self.request_params["id"], error)
+		self.req_manager.set_response_error(self.request_params["id"], error)
 	
 	def close(self):
 		""" Закрытие соединения """

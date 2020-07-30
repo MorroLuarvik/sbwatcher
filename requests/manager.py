@@ -4,6 +4,7 @@
 
 from datasource import Datasource
 from interfaces import Sbrf
+from .https_request_client import HttpsRequestClient
 
 class Manager:
 		ds = None
@@ -21,7 +22,8 @@ class Manager:
 				region_code = fins[0]["region_code"]
 				rate_category_code = fins[0]["rate_category_code"]
 
-				return self.interface.get_request_params(0, region_code, rate_category_code, [ fin['curr_code'] for fin in fins ])
+				return [ HttpsRequestClient(self, params) for params in self.interface.get_request_params(0, region_code, rate_category_code, [ fin['curr_code'] for fin in fins ]) ]
+				#return self.interface.get_request_params(0, region_code, rate_category_code, [ fin['curr_code'] for fin in fins ])
 				# ============ TODO temporary solution ============ #
 
 		def set_response_data(self, req_id, data):
