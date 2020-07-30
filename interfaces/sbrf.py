@@ -22,7 +22,7 @@ class Sbrf:
 	def __init__(self, ds = None):
 		self.ds = ds
 
-	def get_request(self, req_id = None, region_code = "27", rate_category_code = "beznal", curr_codes = []):
+	def get_request_params(self, req_id = None, region_code = "27", rate_category_code = "beznal", curr_codes = []):
 		""" получить структура запроса к серверу """
 		# ============ TODO temporary solution ============ #
 		region = "regionId%3D" + region_code
