@@ -4,25 +4,34 @@
 
 from configurator.configurator import get_config
 
+smtp_config = get_config("smtp")
+
 import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 recepient = "dr.morro.l@gmail.com"
 
-message = """\
-From: work computer <from@fromdomain.com>
-To: To Person <%s>
-MIME-Version: 1.0
-Content-type: text/plain; charset=utf-8
-Subject: need 2 read
+message = MIMEMultipart("alternative")
+message["Subject"] = 'Недельный минимум'
+message['From'] = smtp_config["login"]["user"]
+message['To'] = recepient
 
-This is an e-mail message to be sent in HTML format
+message_text = """\
+Добрый день.
 
-WO "u" symbol in start string 
-""" % (recepient)
+===================
+Проверка с хостинга
+===================
 
-smtp_config = get_config("smtp")
+Проверка с рабочего компа
+Bye!'"""
+
+mail_body = MIMEText(message_text, "plain", "utf-8")
+
+message.attach(mail_body)
 
 smtpObj = smtplib.SMTP(**smtp_config["SMTP"])
 smtpObj.login(**smtp_config["login"])
-smtpObj.sendmail(smtp_config["login"]["user"], recepient, message)
+smtpObj.sendmail(smtp_config["login"]["user"], recepient, message.as_string())
 smtpObj.quit()
