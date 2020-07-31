@@ -10,14 +10,12 @@ class Sbrf:
 	port = 443
 
 	data_relations = {
-		#'isoCur': 'curr_iso', 
-		#'categoryCode': 'rate_category_code',
 		'buyValue': 'buy_price', 
 		'sellValue': 'sell_price', 
 		'activeFrom': 'event_ts'
 	}
 
-	ds = None # datasource
+	ds = None
 
 	def __init__(self, ds = None):
 		self.ds = ds

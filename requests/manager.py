@@ -40,13 +40,3 @@ class Manager:
 						if not self.ds.is_exists_rate(rate_row):
 							self.ds.insert_rates(rate_row)
 				return True
-
-		"""
-		def _is_exists_rate(self, rate_row):
-				проверяет наличие данного курса в истории
-				params = {}
-				for key in rate_row.keys():
-						params['RL.' + key] = rate_row[key]
-
-				return len(self.ds.get_rates(params))
-		"""
