@@ -117,7 +117,7 @@ VALUES ('dr.morro.l@gmail.com', 'Morro Luarvik');
 *********************************/
 DROP TABLE IF EXISTS  `sbwatcher`.`u_accounts`;
 CREATE TABLE `sbwatcher`.`u_accounts` (
-    `account_id`  int unsigned NOT NULL primary key AUTO_INCREMENT,
+    `account_id` int unsigned NOT NULL primary key AUTO_INCREMENT,
     `user_id` int unsigned NOT NULL,
     `fin_id` int unsigned NOT NULL,
     `curr_volume` FLOAT (16,8) unsigned NOT NULL,
@@ -134,4 +134,38 @@ CREATE TABLE `sbwatcher`.`u_accounts` (
     KEY `disabled_idx` (`disabled`) USING BTREE
 ) ENGINE=InnoDB ROW_FORMAT=DYNAMIC DEFAULT CHARSET=utf8;
 
+/*********************************
+** События для анализа          **
+*********************************/
+DROP TABLE IF EXISTS  `sbwatcher`.`a_events`;
+CREATE TABLE `sbwatcher`.`a_events` (
+    `event_id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `event_name` VARCHAR (127) NOT NULL DEFAULT '',
+    `event_param` VARCHAR (127) DEFAULT '',
+    
+    UNIQUE KEY `event_name_idx` (`event_param`) USING BTREE
+) ENGINE=InnoDB ROW_FORMAT=DYNAMIC DEFAULT CHARSET=utf8;
+
+INSERT INTO `sbwatcher`.`a_events` (`event_name`, `event_param`)
+VALUES
+    ('Недельный минимум', CONVERT(3600 * 24 * 7, CHAR)),
+    ('Двухнедельный минимум', CONVERT(3600 * 24 * 14, CHAR)),
+    ('Месячный минимум', CONVERT(3600 * 24 * 30, CHAR)),
+    ('Квартальный минимум', CONVERT(3600 * 24 * 30, CHAR)),
+    ('Плугодовой минимум', CONVERT(3600 * 24 * 30, CHAR)),
+    ('Годовой минимум', CONVERT(3600 * 24 * 365, CHAR));
+
+
+/*********************************
+** шаблоны отчётов              **
+*********************************/
+DROP TABLE IF EXISTS  `sbwatcher`.`r_templates`;
+CREATE TABLE `sbwatcher`.`r_templates` (
+    `template_id`  int unsigned NOT NULL primary key AUTO_INCREMENT,
+    `tempalte_subject` VARCHAR (255) NOT NULL DEFAULT '',
+    `template_body` TEXT,
+
+    UNIQUE KEY `tempalte_subject_idx` (`tempalte_subject`) USING BTREE,
+    KEY `template_body_idx` (`template_body`(255)) USING BTREE
+) ENGINE=InnoDB ROW_FORMAT=DYNAMIC DEFAULT CHARSET=utf8;
 
