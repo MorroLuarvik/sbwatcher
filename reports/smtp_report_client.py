@@ -38,6 +38,7 @@ class SmtpReportClient(AbstractReportClient):
 		self.smtp_object = smtplib.SMTP(**self.smtp_config["SMTP"])
 		self.smtp_object.login(**self.smtp_config["login"])
 		self.smtp_object.sendmail(self.smtp_config["login"]["user"], self.report_params['recepient'], self.message.as_string())
+		#print(self.message.as_string())
 
 	def confirm_report(self):
 		""" Подтверждение отправки отчёта """

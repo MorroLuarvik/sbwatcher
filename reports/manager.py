@@ -23,7 +23,23 @@ class Manager:
 
 		def get_reports(self):
 			""" возвращает массив объектами отчётов """
-			return []
+			# =============== код для проверки всей фигни =============== #
+			messages = [
+				{
+					'report_id': 2,
+					'subject': 'Должно приходить сразу',
+					'recepient': 'dr.morro.l@gmail.com',
+					'message_text': 'Первое сообщение \r\n Вторая строка\r\nБез вывода на экран.'
+				},
+				{
+					'report_id': 42,
+					'subject': 'Приходит с опозданием',
+					'recepient': 'kozlov-work@yandex.ru',
+					'message_text': 'Второе сообщение \r\n Second строка\r\nВывода на экран нет.'
+				}
+			]
+			return [SmtpReportClient(self, row) for row in messages]
+			# =============== код для проверки всей фигни =============== #
 
 		def get_smtp_config(self):
 			""" возвращает параметры SMTP соединения """
@@ -31,8 +47,14 @@ class Manager:
 
 		def confirm_report_error(self, report_id: int = None):
 			""" Подтверждение отправки отчёта """
+			# =============== код для проверки всей фигни =============== #
+			print("confirm_report_error report_id: {}".format(report_id))
+			# =============== код для проверки всей фигни =============== #
 			pass
 		
 		def set_report_error(self, report_id: int = None, error = 'uncknown error'):
 			""" Регистрируется ошибка полученная при отправке отчёта """
+			# =============== код для проверки всей фигни =============== #
+			print("set_report_error report_id: {}, error: \"{}\"".format(report_id, error))
+			# =============== код для проверки всей фигни =============== #
 			pass
