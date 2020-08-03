@@ -4,10 +4,7 @@
 
 import init
 
-from datasource import Datasource
-
-ds = Datasource()
-
-print(ds.get_stat_rates({'fin_id': [1, 2]}))
-
-print("привет!")
+try:
+    s = 1 / 0
+except Exception as error:
+    print(error)

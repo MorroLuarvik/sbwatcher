@@ -31,7 +31,22 @@ mail_body = MIMEText(message_text, "plain", "utf-8")
 
 message.attach(mail_body)
 
-smtpObj = smtplib.SMTP(**smtp_config["SMTP"])
-smtpObj.login(**smtp_config["login"])
-smtpObj.sendmail(smtp_config["login"]["user"], recepient, message.as_string())
-smtpObj.quit()
+smtp_object = smtplib.SMTP(**smtp_config["SMTP"])
+smtp_object.login(**smtp_config["login"])
+smtp_object.sendmail(smtp_config["login"]["user"], recepient, message.as_string())
+smtp_object.quit()
+
+"""
+import init
+
+from reports import Manager
+
+rep_manager = Manager()
+for rep in rep_manager.get_reports():
+	rep.init()
+	try:
+		rep.send_report()
+		rep.confirm_report()
+	except Exception as error:
+		rep.set_report_error(error)
+"""
