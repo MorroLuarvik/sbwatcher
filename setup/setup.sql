@@ -83,7 +83,7 @@ VALUES
 *********************************/
 DROP TABLE IF EXISTS  `sbwatcher`.`f_rates`;
 CREATE TABLE `sbwatcher`.`f_rates` (
-    `record_id`  int unsigned NOT NULL primary key AUTO_INCREMENT,
+    `rate_id`  int unsigned NOT NULL primary key AUTO_INCREMENT,
     `fin_id` int unsigned NOT NULL,
     `buy_price` FLOAT (16,2) unsigned NOT NULL,
     `sell_price` FLOAT (16,2) UNSIGNED NOT NULL,

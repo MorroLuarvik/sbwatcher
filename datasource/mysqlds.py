@@ -66,7 +66,7 @@ class MySQL(AbstractDatasource):
 		""" получение истории обменов """
 		query = """
 			SELECT
-				RL.record_id,
+				RL.rate_id,
 				RL.fin_id,
 				RL.buy_price,
 				RL.sell_price,
@@ -100,7 +100,7 @@ class MySQL(AbstractDatasource):
 		""" получение последнего обмена """
 		query = """
 			SELECT
-				RL.record_id,
+				RL.rate_id,
 				RL.fin_id,
 				RL.buy_price,
 				RL.sell_price,
