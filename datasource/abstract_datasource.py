@@ -28,3 +28,6 @@ class AbstractDatasource:
 		""" добавление параметров в историю обменов """
 		raise NotImplementedError("Определите get_exchange в %s." % (self.__class__.__name__))
 
+	def get_account_finances(self, where = {}):
+		""" получение списка финансов текущих аккаунтов """
+		raise NotImplementedError("Определите get_account_finances в %s." % (self.__class__.__name__))
