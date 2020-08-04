@@ -31,3 +31,8 @@ class AbstractDatasource:
 	def get_account_finances(self, where = {}):
 		""" получение списка финансов текущих аккаунтов """
 		raise NotImplementedError("Определите get_account_finances в %s." % (self.__class__.__name__))
+
+	def get_accounts(self, where = {}):
+		""" получение списка текущих аккаунтов """
+		raise NotImplementedError("Определите get_accounts в %s." % (self.__class__.__name__))
+

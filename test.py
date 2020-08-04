@@ -4,7 +4,18 @@
 
 import init
 
-from analyzer import Manager
-a_manager = Manager()
+from analyzer import Manager as AnManager
+an_manager = AnManager()
+from users import Users
+users = Users()
+from reports import Manager as RepManager
+rep_manager = RepManager()
 
-print(a_manager._get_event(2))
+
+
+for event in an_manager.get_rate_events():
+    for account in users.get_active_accounts(fin_id = event.get_fin_id()):
+        if event.is_suit(account):
+            print(account)
+            #rep_manager.set_report(account, event)
+    #event.set_used()

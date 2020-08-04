@@ -69,6 +69,7 @@ class Manager:
 			start_ts = datetime.datetime.now().timestamp() - event_type['event_length']
 			[state_row] = self.ds.get_stat_rates({'fin_id': fin_id, 'event_ts >': start_ts})
 			if state_row['min_sell_pice'] >= rate_row['sell_price']:
+				event_type['sell_pice'] = rate_row['sell_price']
 				return event_type, rate_row['rate_id']
 
 		return None, None
