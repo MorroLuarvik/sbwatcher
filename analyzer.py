@@ -18,8 +18,6 @@ users = Users()
 an_manager = Manager()
 
 
-#for fin_id in an_manager.get_active_finances():
-
 for event in an_manager.get_rate_events():
     for account in users.get_active_accounts(fin_id = event.get_fin_id()):
         if event.is_suit(account):
