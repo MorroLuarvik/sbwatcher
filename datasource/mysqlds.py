@@ -267,8 +267,6 @@ class MySQL(AbstractDatasource):
 			SET %s
 			WHERE %s """ % (self._construct_query_sets(values), self._construct_where_conditions(where))
 
-		print(query)
-
 		cursor = self._get_cursor()
 
 		cursor.execute(query)

@@ -3,7 +3,7 @@
 """ Модуль проверки кода """
 
 import init
-import datetime
+#import datetime
 
 from datasource import Datasource
 

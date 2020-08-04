@@ -17,8 +17,8 @@ class Event():
 		self.ds = ds
 
 	def is_used(self):
-		""" True - если такое событие существует и уже использовано """
-		return False
+		""" кол-во использованных событий """
+		return len(self.ds.get_events({'fin_id': self.fin_id, 'rate_id': self.rate_id, 'is_used': 1}))
 
 	def is_suit(self, account = {}):
 		""" Подходит ли текущее финансовое событие к аккаунту пользователя """
@@ -33,7 +33,11 @@ class Event():
 		""" получение id финанса текущего события  """
 		return self.fin_id
 
+	def get_event_type(self):
+		""" возвращает описание события """
+		return self.event_type
 
 	def set_used(self):
 		""" отметка о выполнении """
-		pass
+		return self.ds.update_event({'is_used': True}, {'fin_id': self.fin_id, 'rate_id': self.rate_id})
+
