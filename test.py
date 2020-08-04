@@ -3,19 +3,6 @@
 """ Модуль проверки кода """
 
 import init
-#import datetime
-
-from datasource import Datasource
-
-ds = Datasource()
-print(ds.get_events())
-ds.insert_event({'fin_id': 0, 'rate_id': 666, 'event_ts': datetime.datetime.now().timestamp()})
-#print(ds.get_events())
-ds.update_event({'is_used': True}, {'fin_id': 0, 'rate_id': 666})
-print(ds.get_events())
-
-"""
-exit()
 
 from analyzer import Manager as AnManager
 an_manager = AnManager()
@@ -34,4 +21,3 @@ for event in an_manager.get_rate_events():
             print(account)
             #rep_manager.set_report(account, event)
     #event.set_used()
-"""

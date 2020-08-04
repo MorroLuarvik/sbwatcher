@@ -2,6 +2,8 @@
 #-*-coding:utf-8-*-
 """ Модуль финансовых событий """
 
+import datetime
+
 class Event():
 	""" Класс финансовых событий """
 	fin_id = None
@@ -15,6 +17,9 @@ class Event():
 		self.event_type = event_type
 		self.rate_id = rate_id
 		self.ds = ds
+
+		if not self._is_exists():
+			self._register()
 
 	def is_used(self):
 		""" кол-во использованных событий """
@@ -41,3 +46,10 @@ class Event():
 		""" отметка о выполнении """
 		return self.ds.update_event({'is_used': True}, {'fin_id': self.fin_id, 'rate_id': self.rate_id})
 
+	def _is_exists(self):
+		""" кол-во таких-же событий """
+		return len(self.ds.get_events({'fin_id': self.fin_id, 'rate_id': self.rate_id}))
+
+	def _register(self):
+		""" кол-во таких-же событий """
+		return self.ds.insert_event({'fin_id': self.fin_id, 'rate_id': self.rate_id, 'event_ts': datetime.datetime.now().timestamp()})
