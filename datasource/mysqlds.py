@@ -136,12 +136,12 @@ class MySQL(AbstractDatasource):
 		query = """
 			SELECT
 				fin_id,
-				MIN(buy_price) AS min_buy_pice,
-				MAX(buy_price) AS max_buy_pice,
-				AVG(buy_price) AS avg_buy_pice,
-				MIN(sell_price) AS min_sell_pice,
-				MAX(sell_price) AS max_sell_pice,
-				AVG(sell_price) AS avg_sell_pice
+				MIN(buy_price) AS min_buy_price,
+				MAX(buy_price) AS max_buy_price,
+				AVG(buy_price) AS avg_buy_price,
+				MIN(sell_price) AS min_sell_price,
+				MAX(sell_price) AS max_sell_price,
+				AVG(sell_price) AS avg_sell_price
 			FROM f_rates
 			WHERE %s
 			GROUP BY fin_id""" % self._construct_where_conditions(where)
