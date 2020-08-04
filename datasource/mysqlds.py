@@ -216,14 +216,14 @@ class MySQL(AbstractDatasource):
 				RC.rate_category_code,
 				RC.rate_category_name,
 				F.curr_id,
-				c.curr_code,
-				c.curr_iso,
-				c.curr_name
+				C.curr_code,
+				C.curr_iso,
+				C.curr_name
 			FROM u_accounts AS A
 			INNER JOIN f_finances AS F ON F.fin_id = A.fin_id
 			INNER JOIN s_regions AS R ON R.region_id = R.region_id
 			INNER JOIN s_rate_categorys AS RC ON RC.rate_category_id = F.rate_category_id
-			INNER JOIN s_currencys AS C On F.curr_id = c.curr_id
+			INNER JOIN s_currencys AS C On F.curr_id = C.curr_id
 			WHERE %s
 			GROUP BY fin_id""" % self._construct_where_conditions(where)
 
