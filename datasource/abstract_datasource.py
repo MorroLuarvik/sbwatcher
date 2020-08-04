@@ -36,3 +36,14 @@ class AbstractDatasource:
 		""" получение списка текущих аккаунтов """
 		raise NotImplementedError("Определите get_accounts в %s." % (self.__class__.__name__))
 
+	def get_events(self, where = {}):
+		""" получение списка событий """
+		raise NotImplementedError("Определите get_events в %s." % (self.__class__.__name__))
+
+	def insert_event(self, values):
+		""" добавление события """
+		raise NotImplementedError("Определите insert_event в %s." % (self.__class__.__name__))
+
+	def update_event(self, values, where):
+		""" изменение события """
+		raise NotImplementedError("Определите update_event в %s." % (self.__class__.__name__))

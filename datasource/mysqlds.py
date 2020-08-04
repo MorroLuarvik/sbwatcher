@@ -232,6 +232,48 @@ class MySQL(AbstractDatasource):
 		cursor.execute(query)
 		return cursor.fetchall()
 
+	def get_events(self, where = {}):
+		""" получение списка событий """
+		query = """
+			SELECT 
+				event_id,
+				fin_id,
+				rate_id,
+				event_ts,
+				is_used
+			FROM a_events
+			WHERE %s""" % self._construct_where_conditions(where)
+
+		cursor = self._get_cursor()
+
+		cursor.execute(query)
+		return cursor.fetchall()
+	
+	def insert_event(self, values):
+		""" добавление события """
+		query = """
+			INSERT INTO a_events (%s)
+			VALUES %s """ % (self._construct_query_keys(values), self._construct_query_values(values))
+
+		cursor = self._get_cursor()
+
+		cursor.execute(query)
+		return self.connect.commit()
+
+	def update_event(self, values, where):
+		""" изменение события """
+		query = """
+			UPDATE a_events 
+			SET %s
+			WHERE %s """ % (self._construct_query_sets(values), self._construct_where_conditions(where))
+
+		print(query)
+
+		cursor = self._get_cursor()
+
+		cursor.execute(query)
+		return self.connect.commit()
+
 	def _construct_query_keys(self, values):
 		""" сборка ключей для функции insert """
 		return  ', '.join(values.keys())
@@ -265,6 +307,22 @@ class MySQL(AbstractDatasource):
 			ret_array.append("%s %s %s" % (str(key), compare_sign, str(val)))
 		
 		return " and ".join(ret_array)
+	
+	def _construct_query_sets(self, values):
+		""" сборка SET выражения для UPDATE """
+		ret_array = []
+		for key, val in values.items():
+			if isinstance(val, str):
+				ret_array.append("%s = '%s'" % (str(key), str(val)))
+				continue
+			
+			if val is None:
+				ret_array.append("%s = null" % str(key))
+				continue
+			
+			ret_array.append("%s = %s" % (str(key), str(val)))
+		
+		return ", ".join(ret_array)
 	# ----------------------------- реализация функций абстрактного класса ----------------------------- #
 
 	def _get_cursor(self):

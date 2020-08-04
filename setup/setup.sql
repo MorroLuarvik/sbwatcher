@@ -140,20 +140,14 @@ CREATE TABLE `sbwatcher`.`u_accounts` (
 DROP TABLE IF EXISTS  `sbwatcher`.`a_events`;
 CREATE TABLE `sbwatcher`.`a_events` (
     `event_id` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `event_name` VARCHAR (127) NOT NULL DEFAULT '',
-    `event_param` VARCHAR (127) DEFAULT '',
-    
-    UNIQUE KEY `event_name_idx` (`event_param`) USING BTREE
+    `fin_id` INT UNSIGNED NOT NULL,
+    `rate_id` INT UNSIGNED NOT NULL,
+    `event_ts`  int unsigned NOT NULL,
+    `is_used` TINYINT UNSIGNED NOT NULL DEFAULT 0,
+    UNIQUE KEY `event_idx` (`fin_id`, `rate_id`) USING BTREE,
+    KEY `event_ts_idx` (`event_ts`) USING BTREE,
+    KEY `is_used_idx` (`is_used`) USING BTREE
 ) ENGINE=InnoDB ROW_FORMAT=DYNAMIC DEFAULT CHARSET=utf8;
-
-INSERT INTO `sbwatcher`.`a_events` (`event_name`, `event_param`)
-VALUES
-    ('Недельный минимум', CONVERT(3600 * 24 * 7, CHAR)),
-    ('Двухнедельный минимум', CONVERT(3600 * 24 * 14, CHAR)),
-    ('Месячный минимум', CONVERT(3600 * 24 * 30, CHAR)),
-    ('Квартальный минимум', CONVERT(3600 * 24 * 30, CHAR)),
-    ('Плугодовой минимум', CONVERT(3600 * 24 * 30, CHAR)),
-    ('Годовой минимум', CONVERT(3600 * 24 * 365, CHAR));
 
 
 /*********************************

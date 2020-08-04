@@ -6,12 +6,14 @@ class Event():
 	""" Класс финансовых событий """
 	fin_id = None
 	event_type = None
+	rate_id = None
 	ds = None
 
 	def __init__(self, ds, fin_id, event_type = 'Ничего', rate_id = 0, event_mode = 'invest'):
 		""" инициализация объекта """
 		self.fin_id = fin_id
 		self.event_type = event_type
+		self.rate_id = rate_id
 		self.ds = ds
 
 	def is_used(self):

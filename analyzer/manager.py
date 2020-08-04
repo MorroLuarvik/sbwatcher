@@ -55,7 +55,7 @@ class Manager:
 		for fin_id in [row['fin_id'] for row in self.ds.get_account_finances({'A.disabled': 0, 'F.disabled': 0})]:
 			event_type, rate_id = self._get_event(fin_id)
 			if (event_type is not None):
-				events.append(Event(self, self.ds, event_type, rate_id))	
+				events.append(Event(self.ds, fin_id, event_type, rate_id))	
 		return events
 
 	def _get_event(self, fin_id: int = 0):
