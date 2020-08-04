@@ -20,9 +20,9 @@ an_manager = Manager()
 
 #for fin_id in an_manager.get_active_finances():
 
-for event in an_manager.get_rate_event(fin_id):
-    for account in users.get_active_account(fin_id = event.get_fin_id()):
-        if an_manager.is_suit(account, event):
-            rep_manager.send_report(account, event)
-    an_manager.set_used(event)
+for event in an_manager.get_rate_events():
+    for account in users.get_active_accounts(fin_id = event.get_fin_id()):
+        if event.is_suit(account):
+            rep_manager.set_report(account, event)
+    event.set_used()
 """
