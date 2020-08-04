@@ -19,7 +19,8 @@ def get_change_percent(fin_id):
     now_ts = datetime.datetime.now().timestamp()
     base_price = get_middle_price(fin_id, now_ts - DDD * 10, now_ts * DDD * 3)
     new_price = get_middle_price(fin_id, now_ts - DDD * 7, now_ts)
-    return 100 - new_price * 100 / base_price
+    #print('fin_id: {}\tbase price: {}\tnew price: {}'.format(fin_id, base_price, new_price))
+    return new_price * 100 / base_price - 100
 
 for fin_row in ds.get_finances({'disabled =': 0}):
     [top_rate] = ds.get_top_rate({'RL.fin_id': fin_row['fin_id']})
