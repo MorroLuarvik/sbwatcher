@@ -6,7 +6,6 @@ import init
 
 import datetime
 from datasource import Datasource
-from users import Users
 
 DDD = 24 * 3600
 
@@ -28,6 +27,3 @@ for fin_row in ds.get_finances({'disabled =': 0}):
     top_rate['event_dt_dispaly'] = top_rate['event_dt'].strftime('%Y.%m.%d %H:%M:%S')
     top_rate['change_percent'] = get_change_percent(fin_row['fin_id'])
     print("{event_dt_dispaly} {curr_name} \tbuy: {buy_price} \tsell: {sell_price}\tchange percent: {change_percent:+05.2f}%".format(**top_rate))
-
-u = Users()
-print(u.get_active_accounts(1))
