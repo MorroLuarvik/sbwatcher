@@ -20,4 +20,8 @@ for event in an_manager.get_rate_events():
 			print(event.get_event_type())
 			print(account)
 			#rep_manager.set_report(account, event)
+		else: # debug condition
+			print('NOT sended')
+			print(event.get_event_type())
+			print(account)
 	event.set_used()
