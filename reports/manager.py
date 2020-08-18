@@ -25,7 +25,9 @@ class Manager:
 	def get_reports(self):
 		""" возвращает массив объектами отчётов """
 		# =============== код для проверки всей фигни =============== #
-		messages = [
+		messages = self.ds.get_messages({'send_ts': None})
+		"""
+		 [
 			{
 				'report_id': 2,
 				'subject': 'Должно приходить сразу',
@@ -39,6 +41,7 @@ class Manager:
 				'message_text': 'Второе сообщение \r\n Second строка\r\nВывода на экран нет.'
 			}
 		]
+		"""
 		return [SmtpReportClient(self, row) for row in messages]
 		# =============== код для проверки всей фигни =============== #
 
@@ -68,12 +71,9 @@ class Manager:
 		""" возвращает параметры SMTP соединения """
 		return self.smtp_config
 
-	def confirm_report_error(self, report_id: int = None):
+	def confirm_report_error(self, message_id: int = None):
 		""" Подтверждение отправки отчёта """
-		# =============== код для проверки всей фигни =============== #
-		print("confirm_report_error report_id: {}".format(report_id))
-		# =============== код для проверки всей фигни =============== #
-		pass
+		return self.ds.update_message({'send_ts': int(datetime.datetime.now().timestamp())}, {'message_id': message_id})
 	
 	def set_report_error(self, report_id: int = None, error = 'uncknown error'):
 		""" Регистрируется ошибка полученная при отправке отчёта """

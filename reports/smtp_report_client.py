@@ -29,7 +29,7 @@ class SmtpReportClient(AbstractReportClient):
 		self.message['From'] = self.smtp_config["login"]["user"]
 		self.message['To'] = self.report_params['recepient']
 
-		mail_body = MIMEText(self.report_params['message_text'], "plain", "utf-8")
+		mail_body = MIMEText(self.report_params['body'], "plain", "utf-8")
 		self.message.attach(mail_body)
 
 
@@ -42,11 +42,11 @@ class SmtpReportClient(AbstractReportClient):
 
 	def confirm_report(self):
 		""" Подтверждение отправки отчёта """
-		self.rep_manager.confirm_report_error(self.report_params["report_id"])
+		self.rep_manager.confirm_report_error(self.report_params["message_id"])
 
 	def set_report_error(self, error):
 		""" Сохранение ошибки в источнике данных """
-		self.rep_manager.set_report_error(self.report_params["report_id"], error)
+		self.rep_manager.set_report_error(self.report_params["message_id"], error)
 	
 	def close(self):
 		""" Закрытие соединения """
