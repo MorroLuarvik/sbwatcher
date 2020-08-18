@@ -163,3 +163,19 @@ CREATE TABLE `sbwatcher`.`r_templates` (
     KEY `template_body_idx` (`template_body`(255)) USING BTREE
 ) ENGINE=InnoDB ROW_FORMAT=DYNAMIC DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS  `sbwatcher`.`r_messages`;
+CREATE TABLE `u184637_projects`.`r_messages` (
+    `message_id`  int unsigned NOT NULL primary key AUTO_INCREMENT,
+    `recepient` VARCHAR (128) NOT NULL DEFAULT '',
+    `subject` VARCHAR (255) NOT NULL DEFAULT '',
+    `body` TEXT,
+    `created_ts`  int unsigned NOT NULL,
+    `send_ts`  int unsigned DEFAULT NULL,
+
+    KEY `recepient_idx` (`recepient`) USING BTREE,
+    KEY `subject_idx` (`subject`) USING BTREE,
+    KEY `body_idx` (`body`(255)) USING BTREE,
+    KEY `created_ts_idx` (`created_ts`) USING BTREE,
+    KEY `send_ts_idx` (`send_ts`) USING BTREE
+) ENGINE=InnoDB ROW_FORMAT=DYNAMIC DEFAULT CHARSET=utf8;
+
