@@ -43,6 +43,10 @@ class AbstractDatasource:
 	def insert_event(self, values):
 		""" добавление события """
 		raise NotImplementedError("Определите insert_event в %s." % (self.__class__.__name__))
+	
+	def insert_message(self, values):
+		""" добавление сообщения """
+		raise NotImplementedError("Определите insert_event в %s." % (self.__class__.__name__))
 
 	def update_event(self, values, where):
 		""" изменение события """

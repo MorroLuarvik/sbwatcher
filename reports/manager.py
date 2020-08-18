@@ -4,6 +4,7 @@
 
 from datasource import Datasource
 from .smtp_report_client import SmtpReportClient
+import datetime
 
 class Manager:
 	""" Класс управления запросами """
@@ -40,6 +41,28 @@ class Manager:
 		]
 		return [SmtpReportClient(self, row) for row in messages]
 		# =============== код для проверки всей фигни =============== #
+
+	def set_report(self, account, event_type):
+		""" Формируе сообщение в БД """ 
+		recepient = account['user_email']
+		subject = account['curr_name'] + ' ' + event_type['type_descr']
+		body = """
+		{:%Y.%m.%d %H:%M}
+		Тип: {}\tВалюта: {}\tЦена: {}
+		Это меньше чем {} на вкладе {} с объемом {}.
+		""".format(
+			datetime.datetime.now(),
+
+			event_type['type_descr'],
+			account['curr_name'],
+			event_type['sell_price'],
+
+			account['curr_price'],
+			account['curr_name'],
+			account['curr_volume']
+		)
+		return self.ds.insert_message({'recepient': recepient, 'subject': subject, 'body': body, 'created_ts': int(datetime.datetime.now().timestamp())})
+
 
 	def get_smtp_config(self):
 		""" возвращает параметры SMTP соединения """

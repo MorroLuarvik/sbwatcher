@@ -260,6 +260,19 @@ class MySQL(AbstractDatasource):
 		cursor.execute(query)
 		return self.connect.commit()
 
+	def insert_message(self, values):
+		""" добавление сообщения """
+		query = """
+			INSERT INTO r_messages (%s)
+			VALUES %s """ % (self._construct_query_keys(values), self._construct_query_values(values))
+
+		print(query)
+
+		cursor = self._get_cursor()
+
+		cursor.execute(query)
+		return self.connect.commit()
+
 	def update_event(self, values, where):
 		""" изменение события """
 		query = """
@@ -278,7 +291,7 @@ class MySQL(AbstractDatasource):
 
 	def _construct_query_values(self, values):
 		""" сборка значений для функции insert TODO сделать вариант для множества строк"""
-		return '(' + ', '.join(str(item) for item in values.values()) + ')'
+		return '(' + ', '.join('"' + str(item) + '"' for item in values.values()) + ')'
 
 	def _construct_where_conditions(self, where = {}):
 		""" сборка where условия SQL запроса """
