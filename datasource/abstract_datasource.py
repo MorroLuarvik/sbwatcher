@@ -39,6 +39,10 @@ class AbstractDatasource:
 	def get_events(self, where = {}):
 		""" получение списка событий """
 		raise NotImplementedError("Определите get_events в %s." % (self.__class__.__name__))
+	
+	def get_messages(self, where = {}):
+		""" получение списка сообщений """
+		raise NotImplementedError("Определите get_messages в %s." % (self.__class__.__name__))
 
 	def insert_event(self, values):
 		""" добавление события """
@@ -46,8 +50,13 @@ class AbstractDatasource:
 	
 	def insert_message(self, values):
 		""" добавление сообщения """
-		raise NotImplementedError("Определите insert_event в %s." % (self.__class__.__name__))
+		raise NotImplementedError("Определите insert_message в %s." % (self.__class__.__name__))
 
 	def update_event(self, values, where):
 		""" изменение события """
 		raise NotImplementedError("Определите update_event в %s." % (self.__class__.__name__))
+	
+	def update_message(self, values, where):
+		""" изменение сообщения """
+		raise NotImplementedError("Определите update_message в %s." % (self.__class__.__name__))
+
