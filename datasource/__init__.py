@@ -8,3 +8,4 @@ from .mysqlds import MySQL
 
 from .users import Users
 from .request import Request
+from .report import Report

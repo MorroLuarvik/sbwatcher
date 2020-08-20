@@ -16,6 +16,7 @@ class Manager:
 	def __init__(self):
 		""" инициализация источника данных """
 		self.ds = Datasource()
+		self.ds.switch_datasource('report')
 	
 	@classmethod
 	def set_report_configs(cls, configs = {} ):
