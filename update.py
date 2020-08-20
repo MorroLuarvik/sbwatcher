@@ -6,6 +6,7 @@ import sys
 import init
 from datasource import Datasource
 ds = Datasource()
+ds.switch_datasource('request')
 
 if len(sys.argv) != 3:
 	print("Укажите fin_id и файл с исходниками торгов: \"update.py fin_id source_file\"")
