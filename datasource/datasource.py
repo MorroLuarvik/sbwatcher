@@ -53,7 +53,8 @@ class Datasource(AbstractDatasource): # наследование от абстр
 
 	def _disable_active_datasource(self):
 		""" отключение активного источника данных """
-		del(self.datasource_list[self.selected_datasource]["object"])
+		if 'object' in self.datasource_list[self.selected_datasource]:
+			del(self.datasource_list[self.selected_datasource]["object"])
 
 	def _activate_datasource(self, key: str):
 		""" включение указанного источника данных """

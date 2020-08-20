@@ -5,3 +5,5 @@
 
 from .datasource import Datasource
 from .mysqlds import MySQL
+
+from .users import Users

@@ -11,6 +11,7 @@ class Users:
 	def __init__(self):
 		""" инициализация источника данных """
 		self.ds = Datasource()
+		self.ds.switch_datasource('users')
 	
 
 	def get_active_accounts(self, fin_id = 0):
