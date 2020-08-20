@@ -47,6 +47,7 @@ class Manager:
 	def __init__(self):
 		""" инициализация источника данных """
 		self.ds = Datasource()
+		self.ds.switch_datasource('stat')
 	
 
 	def get_rate_events(self):

@@ -10,7 +10,7 @@ import datetime
 from datasource import Datasource
 
 ds = Datasource()
-ds.switch_datasource('request')
+ds.switch_datasource('stat')
 for row in ds.get_rates({'event_ts >': datetime.datetime.now().timestamp() - day_date_deep}):
     row['event_dt_dispaly'] = row['event_dt'].strftime('%Y.%m.%d %H:%M:%S')
     print('{event_dt_dispaly} {curr_name} \tbuy: {buy_price} \tsell: {sell_price}'.format(**row))

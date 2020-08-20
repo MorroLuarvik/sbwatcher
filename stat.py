@@ -10,6 +10,7 @@ from datasource import Datasource
 DDD = 24 * 3600
 
 ds = Datasource()
+ds.switch_datasource('stat')
 
 def get_middle_price(fin_id, start_ts, end_ts):
     [rate_stat] = ds.get_stat_rates({'event_ts >=': start_ts, 'event_ts <=': end_ts, 'fin_id': fin_id})
