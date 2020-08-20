@@ -9,6 +9,8 @@ import init
 import datetime
 from datasource import Datasource
 
+print('old verson')
+
 ds = Datasource()
 for row in ds.get_rates({'event_ts >': datetime.datetime.now().timestamp() - day_date_deep}):
     row['event_dt_dispaly'] = row['event_dt'].strftime('%Y.%m.%d %H:%M:%S')
