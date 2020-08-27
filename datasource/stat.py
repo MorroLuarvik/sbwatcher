@@ -2,7 +2,7 @@
 #-*-coding:utf-8-*-
 """ Модуль источника данных MySQL cо статистической информацией """
 
-from .mysqlds import MySQL
+from .wrap_ds import MySQL
 
 class Stat(MySQL):
 	""" Источник данных MySQL cо статистической информацией """

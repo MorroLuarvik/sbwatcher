@@ -2,7 +2,7 @@
 #-*-coding:utf-8-*-
 """ Источник данных """
 
-from .abstract_datasource import AbstractDatasource
+from .wrap_ds import AbstractDatasource
 
 class Datasource(AbstractDatasource): # наследование от абстрактного класса источника данных сделано для отображения всплывающих подсказок
 	""" Источник данных """

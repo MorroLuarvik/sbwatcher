@@ -2,7 +2,8 @@
 #-*-coding:utf-8-*-
 """ инициализация модулей """
 
-from datasource import Datasource, MySQL 
+from datasource import Datasource
+from datasource import MySQL 
 from datasource import Users
 from datasource import Request
 from datasource import Report

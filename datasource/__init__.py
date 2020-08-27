@@ -4,7 +4,7 @@
 Модуль данных `MySQL`"""
 
 from .datasource import Datasource
-from .mysqlds import MySQL
+from .wrap_ds import MySQL
 
 from .users import Users
 from .request import Request

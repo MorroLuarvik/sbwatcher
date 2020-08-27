@@ -2,7 +2,7 @@
 #-*-coding:utf-8-*-
 """ Модуль источника данных MySQL c информацией о запросах """
 
-from .mysqlds import MySQL
+from .wrap_ds import MySQL
 
 class Request(MySQL):
 	""" Источник данных MySQL c информацией о запросах """
