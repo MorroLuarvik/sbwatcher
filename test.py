@@ -2,17 +2,19 @@
 #-*-coding:utf-8-*-
 """ Модуль проверки кода """
 
-import init
+import sys
 
-from datasource import Datasource
+DEFAULT_DAYS = 1
 
-ds = Datasource()
+#print(len(sys.argv))
 
-print(ds.datasource_list)
-print(ds.selected_datasource)
-ds.switch_datasource('mysql')
-print(ds.datasource_list)
-print(ds.selected_datasource)
-ds.switch_datasource('users')
-print(ds.datasource_list)
-print(ds.selected_datasource)
+days = DEFAULT_DAYS
+
+if len(sys.argv) > 1:
+    try:
+        days = int(sys.argv[1])
+    except ValueError:
+        days = DEFAULT_DAYS
+
+
+print(days)
