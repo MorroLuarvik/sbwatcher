@@ -80,7 +80,22 @@ class Manager:
 	
 	def _get_profit_event(self, fin_id: int = 0):
 		""" Определяет финансовое событие профита и возвращает event_type, rate_id """
-		return None, None
+		try:
+			[rate_row] = self.ds.get_top_rate({'RL.fin_id': fin_id})
+		except ValueError:
+			return None, None
+		
+		price_change = self.ds.get_change_percent(fin_id)
+		if price_change > 0:
+			return None, None
+		
+		rate_type = {
+			'type_name': 'change_trand',
+			'type_descr': 'Смена тренда',
+			'event_length': 666
+		}
+
+		return 	rate_type, rate_row['rate_id']
 
 	def set_report_error(self, report_id: int = None, error = 'uncknown error'):
 		""" Регистрируется ошибка полученная при отправке отчёта """

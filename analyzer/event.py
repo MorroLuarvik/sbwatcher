@@ -33,6 +33,9 @@ class Event():
 
 	def is_suit(self, account = {}):
 		""" Подходит ли текущее финансовое событие к аккаунту пользователя """
+		if self.mode_id == 1:
+			return False
+
 		if account['curr_volume'] == 0:
 			return True
 		
@@ -54,9 +57,6 @@ class Event():
 
 	def _is_exists(self):
 		""" кол-во таких-же событий """
-		if self.mode_id: # профитное событие
-			return len(self.ds.get_events({'fin_id': self.fin_id, 'mode_id': self.mode_id, 'is_used': False}))	
-
 		return len(self.ds.get_events({'fin_id': self.fin_id, 'rate_id': self.rate_id, 'mode_id': self.mode_id}))
 
 	def _register(self):
