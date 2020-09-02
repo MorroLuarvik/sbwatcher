@@ -89,13 +89,15 @@ class Manager:
 		if price_change > 0:
 			return None, None
 		
-		rate_type = {
+		event_type = {
 			'type_name': 'downtrend',
 			'type_descr': 'Нисходящий тренд',
-			'event_length': 666
+			'event_length': 666,
+			'sell_price': rate_row['sell_price'],
+			'buy_price': rate_row['buy_price']
 		}
 
-		return 	rate_type, rate_row['rate_id']
+		return 	event_type, rate_row['rate_id']
 
 	def set_report_error(self, report_id: int = None, error = 'uncknown error'):
 		""" Регистрируется ошибка полученная при отправке отчёта """

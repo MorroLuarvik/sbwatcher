@@ -32,21 +32,38 @@ class Manager:
 		""" Формируе сообщение в БД """ 
 		recepient = account['user_email']
 		subject = account['curr_name'] + ' ' + event_type['type_descr']
-		body = """
-		{:%Y.%m.%d %H:%M}
-		Тип: {}\tВалюта: {}\tЦена: {}
-		Это меньше чем {} на вкладе {} с объемом {}.
-		""".format(
-			datetime.datetime.now(),
+		if event_type['type_name'] == 'downtrend':
+			body = """
+			{:%Y.%m.%d %H:%M}
+			Тип: {}\tВалюта: {}\tЦена: {}
+			Это больше чем {} на вкладе {} с объемом {}.
+			""".format(
+				datetime.datetime.now(),
 
-			event_type['type_descr'],
-			account['curr_name'],
-			event_type['sell_price'],
+				event_type['type_descr'],
+				account['curr_name'],
+				event_type['buy_price'],
 
-			account['curr_price'],
-			account['curr_name'],
-			account['curr_volume']
-		)
+				account['curr_price'],
+				account['curr_name'],
+				account['curr_volume']
+			)
+		else:
+			body = """
+			{:%Y.%m.%d %H:%M}
+			Тип: {}\tВалюта: {}\tЦена: {}
+			Это меньше чем {} на вкладе {} с объемом {}.
+			""".format(
+				datetime.datetime.now(),
+
+				event_type['type_descr'],
+				account['curr_name'],
+				event_type['sell_price'],
+
+				account['curr_price'],
+				account['curr_name'],
+				account['curr_volume']
+			)
 		return self.ds.insert_message({'recepient': recepient, 'subject': subject, 'body': body, 'created_ts': int(datetime.datetime.now().timestamp())})
 
 

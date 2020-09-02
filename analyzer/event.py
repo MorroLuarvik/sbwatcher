@@ -34,8 +34,30 @@ class Event():
 	def is_suit(self, account = {}):
 		""" Подходит ли текущее финансовое событие к аккаунту пользователя """
 		if self.mode_id == 1:
+			return self._is_profit_suit(account)
+
+		return self._is_invest_suit(account)
+	
+	def _is_profit_suit(self, account = {}):
+		""" Подходит ли текущее профитное событие к аккаунту пользователя """
+		if account['curr_volume'] == 0:
+			return False
+		
+		try:
+			[prev_event] = self.ds.get_single_event({'fin_id': self.fin_id, 'rate_id': self.rate_id, 'mode_id': self.mode_id, 'is_used': True})
+		except ValueError:
 			return False
 
+		if self.ds.get_change_percent(self.fin_id) > self.ds.get_change_percent(self.fin_id, int(prev_event['event_ts'])):
+			return False
+
+		if self.event_type['buy_price'] > account['curr_price']:
+			return True
+		return False
+
+
+	def _is_invest_suit(self, account = {}):
+		""" Подходит ли текущее инвестиционное событие к аккаунту пользователя """
 		if account['curr_volume'] == 0:
 			return True
 		
