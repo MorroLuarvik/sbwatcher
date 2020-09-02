@@ -3,10 +3,13 @@
 """ Модуль источника данных MySQL cо статистической информацией """
 
 from .wrap_ds import MySQL
+import datetime
 
 class Stat(MySQL):
 	""" Источник данных MySQL cо статистической информацией """
 	
+	SECONDS_IN_DAY = 3600 * 24
+
 	def get_finances(self, where = {}):
 		""" получение данных об отслеживаемых финансах """
 		query = """
@@ -150,6 +153,18 @@ class Stat(MySQL):
 
 		cursor.execute(query)
 		return cursor.fetchall()
+	
+	def get_middle_price(self, fin_id, start_ts, end_ts):
+		""" получить среднюю цену за указанный период """
+		[rate_stat] = self.get_stat_rates({'event_ts >=': start_ts, 'event_ts <=': end_ts, 'fin_id': fin_id})
+		return (rate_stat['avg_sell_price'] + rate_stat['avg_buy_price']) / 2
+
+	def get_change_percent(self, fin_id, len_in_days = 7, deep_in_days = 10):
+		""" получить изменение цены в % за период deep_in_days, средняя цена берётся за период len_in_days """
+		now_ts = datetime.datetime.now().timestamp()
+		base_price = self.get_middle_price(fin_id, now_ts - self.SECONDS_IN_DAY * deep_in_days, now_ts * self.SECONDS_IN_DAY * (deep_in_days - len_in_days))
+		new_price = self.get_middle_price(fin_id, now_ts - self.SECONDS_IN_DAY * len_in_days, now_ts)
+		return new_price * 100 / base_price - 100
 
 	def get_events(self, where = {}):
 		""" получение списка событий """

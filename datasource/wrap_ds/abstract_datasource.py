@@ -35,6 +35,11 @@ class AbstractDatasource:
 	def get_accounts(self, where = {}):
 		""" получение списка текущих аккаунтов """
 		raise NotImplementedError("Определите get_accounts в %s." % (self.__class__.__name__))
+	
+	def get_change_percent(self, fin_id, len_in_days = 7, deep_in_days = 10):
+		""" получить изменение цены в % за период deep_in_days, средняя цена берётся за период len_in_days """
+		raise NotImplementedError("Определите get_change_percent в %s." % (self.__class__.__name__))
+
 
 	def get_events(self, where = {}):
 		""" получение списка событий """
