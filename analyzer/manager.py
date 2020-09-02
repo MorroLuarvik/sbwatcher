@@ -94,7 +94,8 @@ class Manager:
 			'type_descr': 'Нисходящий тренд',
 			'event_length': 666,
 			'sell_price': rate_row['sell_price'],
-			'buy_price': rate_row['buy_price']
+			'buy_price': rate_row['buy_price'],
+			'price_change': price_change
 		}
 
 		return 	event_type, rate_row['rate_id']
