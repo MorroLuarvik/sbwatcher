@@ -9,6 +9,7 @@ class Event():
 	fin_id = None
 	event_type = None
 	rate_id = None
+	mode_id = None
 	ds = None
 
 	def __init__(self, ds, fin_id, event_type = 'Ничего', rate_id = 0, event_mode = 'invest'):
@@ -16,6 +17,9 @@ class Event():
 		self.fin_id = fin_id
 		self.event_type = event_type
 		self.rate_id = rate_id
+		self.mode_id = 0
+		if event_mode == 'profit':
+			self.mode_id = 1
 		self.ds = ds
 
 		if not self._is_exists():

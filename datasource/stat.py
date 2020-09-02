@@ -173,6 +173,7 @@ class Stat(MySQL):
 				event_id,
 				fin_id,
 				rate_id,
+				mode_id,
 				event_ts,
 				is_used
 			FROM a_events
