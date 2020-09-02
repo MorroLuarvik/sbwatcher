@@ -54,13 +54,16 @@ class Manager:
 		""" возвращает массив с объектами событий """
 		events = []
 		for fin_id in [row['fin_id'] for row in self.ds.get_account_finances({'A.disabled': 0, 'F.disabled': 0})]:
-			event_type, rate_id = self._get_event(fin_id)
+			event_type, rate_id = self._get_invest_event(fin_id)
 			if (event_type is not None):
-				events.append(Event(self.ds, fin_id, event_type, rate_id))	
+				events.append(Event(self.ds, fin_id, event_type, rate_id, 'invest'))	
+			event_type, rate_id = self._get_profit_event(fin_id)
+			if (event_type is not None):
+				events.append(Event(self.ds, fin_id, event_type, rate_id, 'profit'))	
 		return events
 
-	def _get_event(self, fin_id: int = 0):
-		""" Определяет финансовое событие и возвращает event_type, rate_id """
+	def _get_invest_event(self, fin_id: int = 0):
+		""" Определяет финансовое событие инвестирования и возвращает event_type, rate_id """
 		try:
 			[rate_row] = self.ds.get_top_rate({'RL.fin_id': fin_id})
 		except ValueError:
@@ -75,6 +78,10 @@ class Manager:
 
 		return None, None
 	
+	def _get_profit_event(self, fin_id: int = 0):
+		""" Определяет финансовое событие профита и возвращает event_type, rate_id """
+		return None, None
+
 	def set_report_error(self, report_id: int = None, error = 'uncknown error'):
 		""" Регистрируется ошибка полученная при отправке отчёта """
 		# =============== код для проверки всей фигни =============== #

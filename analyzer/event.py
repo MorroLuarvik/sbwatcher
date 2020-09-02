@@ -17,9 +17,11 @@ class Event():
 		self.fin_id = fin_id
 		self.event_type = event_type
 		self.rate_id = rate_id
+		
 		self.mode_id = 0
 		if event_mode == 'profit':
 			self.mode_id = 1
+		
 		self.ds = ds
 
 		if not self._is_exists():
