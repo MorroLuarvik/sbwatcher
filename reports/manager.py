@@ -25,26 +25,8 @@ class Manager:
 
 	def get_reports(self):
 		""" возвращает массив объектами отчётов """
-		# =============== код для проверки всей фигни =============== #
 		messages = self.ds.get_messages({'send_ts': None})
-		"""
-		 [
-			{
-				'report_id': 2,
-				'subject': 'Должно приходить сразу',
-				'recepient': 'dr.morro.l@gmail.com',
-				'message_text': 'Первое сообщение \r\n Вторая строка\r\nБез вывода на экран.'
-			},
-			{
-				'report_id': 42,
-				'subject': 'Приходит с опозданием',
-				'recepient': 'kozlov-work@yandex.ru',
-				'message_text': 'Второе сообщение \r\n Second строка\r\nВывода на экран нет.'
-			}
-		]
-		"""
 		return [SmtpReportClient(self, row) for row in messages]
-		# =============== код для проверки всей фигни =============== #
 
 	def set_report(self, account, event_type):
 		""" Формируе сообщение в БД """ 

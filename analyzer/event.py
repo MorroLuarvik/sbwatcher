@@ -27,7 +27,7 @@ class Event():
 
 	def is_used(self):
 		""" кол-во использованных событий """
-		return len(self.ds.get_events({'fin_id': self.fin_id, 'rate_id': self.rate_id, 'is_used': 1}))
+		return len(self.ds.get_events({'fin_id': self.fin_id, 'rate_id': self.rate_id, 'mode_id': self.mode_id, 'is_used': 1}))
 
 	def is_suit(self, account = {}):
 		""" Подходит ли текущее финансовое событие к аккаунту пользователя """
@@ -48,12 +48,15 @@ class Event():
 
 	def set_used(self):
 		""" отметка о выполнении """
-		return self.ds.update_event({'is_used': True}, {'fin_id': self.fin_id, 'rate_id': self.rate_id})
+		return self.ds.update_event({'is_used': True}, {'fin_id': self.fin_id, 'rate_id': self.rate_id, 'mode_id': self.mode_id})
 
 	def _is_exists(self):
 		""" кол-во таких-же событий """
-		return len(self.ds.get_events({'fin_id': self.fin_id, 'rate_id': self.rate_id}))
+		if self.mode_id: # профитное событие
+			return len(self.ds.get_events({'fin_id': self.fin_id, 'mode_id': self.mode_id, 'is_used': False}))	
+
+		return len(self.ds.get_events({'fin_id': self.fin_id, 'rate_id': self.rate_id, 'mode_id': self.mode_id}))
 
 	def _register(self):
 		""" кол-во таких-же событий """
-		return self.ds.insert_event({'fin_id': self.fin_id, 'rate_id': self.rate_id, 'event_ts': datetime.datetime.now().timestamp()})
+		return self.ds.insert_event({'fin_id': self.fin_id, 'rate_id': self.rate_id, 'mode_id': self.mode_id, 'event_ts': datetime.datetime.now().timestamp()})
