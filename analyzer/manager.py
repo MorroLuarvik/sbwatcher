@@ -90,8 +90,8 @@ class Manager:
 			return None, None
 		
 		rate_type = {
-			'type_name': 'change_trand',
-			'type_descr': 'Смена тренда',
+			'type_name': 'downtrend',
+			'type_descr': 'Нисходящий тренд',
 			'event_length': 666
 		}
 

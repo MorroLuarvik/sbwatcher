@@ -164,7 +164,7 @@ CREATE TABLE `sbwatcher`.`r_templates` (
 ) ENGINE=InnoDB ROW_FORMAT=DYNAMIC DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS  `sbwatcher`.`r_messages`;
-CREATE TABLE `u184637_projects`.`r_messages` (
+CREATE TABLE `sbwatcher`.`r_messages` (
     `message_id`  int unsigned NOT NULL primary key AUTO_INCREMENT,
     `recepient` VARCHAR (128) NOT NULL DEFAULT '',
     `subject` VARCHAR (255) NOT NULL DEFAULT '',
