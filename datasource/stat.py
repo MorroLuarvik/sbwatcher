@@ -185,6 +185,25 @@ class Stat(MySQL):
 		cursor.execute(query)
 		return cursor.fetchall()
 	
+	def get_single_event(self, where = {}):
+		""" получение одного события упорядоченого по дате в порядке убывания """
+		query = """
+			SELECT 
+				event_id,
+				fin_id,
+				rate_id,
+				mode_id,
+				event_ts,
+				is_used
+			FROM a_events
+			WHERE %s
+			ORDER BY event_ts DESC
+			LIMIT 1""" % self._construct_where_conditions(where)
+
+		cursor = self._get_cursor()
+
+		cursor.execute(query)
+		return cursor.fetchall()
 
 	def insert_event(self, values):
 		""" добавление события """

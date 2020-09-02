@@ -40,11 +40,14 @@ class AbstractDatasource:
 		""" получить изменение цены в % за период deep_in_days, средняя цена берётся за период len_in_days """
 		raise NotImplementedError("Определите get_change_percent в %s." % (self.__class__.__name__))
 
-
 	def get_events(self, where = {}):
 		""" получение списка событий """
 		raise NotImplementedError("Определите get_events в %s." % (self.__class__.__name__))
 	
+	def get_single_event(self, where = {}):
+		""" получение одного события упорядоченого по дате в порядке убывания """
+		raise NotImplementedError("Определите get_single_event в %s." % (self.__class__.__name__))
+
 	def get_messages(self, where = {}):
 		""" получение списка сообщений """
 		raise NotImplementedError("Определите get_messages в %s." % (self.__class__.__name__))
