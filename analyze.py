@@ -20,7 +20,7 @@ for event in an_manager.get_rate_events():
 			print('SHALL sended')
 			print(event.get_event_type())
 			print(account)
-			rep_manager.set_report(account, event)
+			rep_manager.set_report(account, event.get_event_type())
 		else: # debug condition
 			print('NOT sended')
 			print(event.get_event_type())
