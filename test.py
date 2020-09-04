@@ -2,7 +2,10 @@
 #-*-coding:utf-8-*-
 """ Модуль проверки кода """
 
-import sys
-import datetime 
+import init
 
-print(datetime.datetime.now().timestamp())
+import time
+
+print("first")
+time.sleep(5)
+print('second')
