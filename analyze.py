@@ -17,12 +17,5 @@ for event in an_manager.get_rate_events():
 		continue
 	for account in users.get_active_accounts(fin_id = event.get_fin_id()):
 		if event.is_suit(account):
-			print('SHALL sended')
-			print(event.get_event_type())
-			print(account)
 			rep_manager.set_report(account, event.get_event_type())
-		else: # debug condition
-			print('NOT sended')
-			print(event.get_event_type())
-			print(account)
 	event.set_used()
