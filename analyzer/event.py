@@ -44,7 +44,7 @@ class Event():
 			return False
 		
 		try:
-			[prev_event] = self.ds.get_single_event({'fin_id': self.fin_id, 'rate_id': self.rate_id, 'mode_id': self.mode_id, 'is_used': True})
+			[prev_event] = self.ds.get_single_event({'fin_id': self.fin_id, 'mode_id': self.mode_id, 'is_used': True})
 		except ValueError:
 			print('ValueError in _is_profit_suit')
 			return False
