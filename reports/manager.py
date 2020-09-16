@@ -34,9 +34,9 @@ class Manager:
 		subject = account['curr_name'] + ' ' + event_type['type_descr']
 		if event_type['type_name'] == 'downtrend':
 			body = """
-			{:%Y.%m.%d %H:%M}
-			Тип: {}\tВалюта: {}\tЦена: {}
-			Это больше чем {} на вкладе {} с объемом {}.
+{:%Y.%m.%d %H:%M}
+Тип: {}\tВалюта: {}\tЦена: {}
+Это больше чем {} на вкладе {} с объемом {}.
 			""".format(
 				datetime.datetime.now(),
 
@@ -50,9 +50,9 @@ class Manager:
 			)
 		else:
 			body = """
-			{:%Y.%m.%d %H:%M}
-			Тип: {}\tВалюта: {}\tЦена: {}
-			Это меньше чем {} на вкладе {} с объемом {}.
+{:%Y.%m.%d %H:%M}
+Тип: {}\tВалюта: {}\tЦена: {}
+Это меньше чем {} на вкладе {} с объемом {}.
 			""".format(
 				datetime.datetime.now(),
 
