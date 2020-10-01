@@ -42,8 +42,8 @@ class Sbrf:
 				#for idx in data[rate_category_code][curr_code]:
 				idx = '0' 
 				if idx in data[rate_category_code][curr_code]:
-					print('key inside')
-					print(data[rate_category_code][curr_code][idx])
+					#print('key inside')
+					#print(data[rate_category_code][curr_code][idx])
 					row = {"fin_id": self._get_fin_id(region_code, rate_category_code, curr_code)}
 					row.update( self._get_rate_row(data[rate_category_code][curr_code][idx]) )
 					ret.append(row)
