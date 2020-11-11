@@ -36,11 +36,6 @@ class HttpsRequestClient(AbstractRequestClient):
 
 	def save_response_data(self, response):
 		""" Сохранение ответа в источнике данных """
-		# ================= debug ================= #
-		#print('# ================= debug ================= #')
-		#print(response)
-		#print('# ================= debug ================= #')
-		# ================= debug ================= #
 		self.req_manager.set_response_data(self.request_params["id"], response)
 
 	def set_response_error(self, error):

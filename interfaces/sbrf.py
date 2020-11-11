@@ -39,11 +39,8 @@ class Sbrf:
 		ret = []
 		for rate_category_code in data.keys():
 			for curr_code in data[rate_category_code].keys():
-				#for idx in data[rate_category_code][curr_code]:
-				idx = '0' 
+				idx = '0' # idx - min amount, станешь богатым учтёшь этот момент
 				if idx in data[rate_category_code][curr_code]:
-					#print('key inside')
-					#print(data[rate_category_code][curr_code][idx])
 					row = {"fin_id": self._get_fin_id(region_code, rate_category_code, curr_code)}
 					row.update( self._get_rate_row(data[rate_category_code][curr_code][idx]) )
 					ret.append(row)
