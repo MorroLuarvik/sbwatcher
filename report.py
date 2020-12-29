@@ -15,4 +15,4 @@ for rep in rep_manager.get_reports():
 	except Exception as error:
 		rep.set_report_error(error)
 	rep.close()
-	break
+	#break

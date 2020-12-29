@@ -25,6 +25,8 @@ class SmtpReportClient(AbstractReportClient):
 
 	def init(self):
 		""" Подготовка отчёта """
+		self.message = MIMEMultipart("alternative")
+
 		self.message["Subject"] = self.report_params['subject']
 		self.message['From'] = self.smtp_config["login"]["user"]
 		self.message['To'] = self.report_params['recepient']
