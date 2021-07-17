@@ -6,12 +6,12 @@ class Sbrf:
 	""" Интерфейс сайта сбербанка """
    
 	host = "www.sberbank.ru"
-	base_url = "/portalserver/proxy/?pipe=shortCachePipe&url=http%3A%2F%2Flocalhost%2Frates-web%2FrateService%2Frate%2Fcurrent%3F"
+	base_url = "/proxy/services/rates/public/actual?"
 	port = 443
 
 	data_relations = {
-		'buyValue': 'buy_price', 
-		'sellValue': 'sell_price', 
+		'rateBuy': 'buy_price', 
+		'rateSell': 'sell_price', 
 		'activeFrom': 'event_ts'
 	}
 
@@ -21,15 +21,15 @@ class Sbrf:
 		self.ds = ds
 		self.ds.switch_datasource('request')
 
-	def get_request_params(self, req_id = None, region_code = "27", rate_category_code = "beznal", curr_codes = []):
+	def get_request_params(self, req_id = 0, region_code = "038", rate_category_code = None, curr_codes = []):
 		""" получить структура запроса к серверу """
 		# ============ TODO temporary solution ============ #
-		region = "regionId%3D" + region_code
-		rate_category = "rateCategory%3D" + rate_category_code
+		region = "regionId=" + region_code
+		rate_category = "rateType=" + rate_category_code
 		return [{
-			"id": 0,
+			"id": req_id,
 			"host": self.host,
-			"url": self.base_url + "%26".join( [region, rate_category] + [ "currencyCode%3D" + curr_code for curr_code in curr_codes ] ),
+			"url": self.base_url + "&".join( [region, rate_category] + [ "isoCodes[]=" + curr_code for curr_code in curr_codes ] ),
 			"port": self.port}]
 		# ============ TODO temporary solution ============ #
 
@@ -60,4 +60,4 @@ class Sbrf:
 
 	def _get_region_code_by_req(self, req_id):
 		""" возвращает code региона по номеру запроса """
-		return '27'        
+		return '038'        
