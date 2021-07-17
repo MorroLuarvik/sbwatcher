@@ -42,10 +42,11 @@ fins = ds.get_finances({'disabled =': 0})
 
 for fin in fins:
     print(fin['curr_name'])
-    print( interface.get_request_params(fin["fin_id"], fin["region_code"], fin["rate_category_code"], [fin["curr_code"]]) )
+    print( interface.get_request_params(fin["fin_id"], fin["region_code"], fin["rate_category_code"], [curr_codes for curr_codes in [fin["curr_code"]]]) )
+    print(list(fin["curr_code"]))
 
 
-print( [ {fin['curr_name'], interface.get_request_params(fin["fin_id"], fin["region_code"], fin["rate_category_code"], [fin["curr_code"]]) } for fin in fins ] )
+print( [ {"lol": fin['curr_name'], "kek": interface.get_request_params(fin["fin_id"], fin["region_code"], fin["rate_category_code"], [fin["curr_code"]]) } for fin in fins ] )
 
 
 print('second')

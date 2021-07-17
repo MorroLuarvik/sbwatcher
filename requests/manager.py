@@ -20,10 +20,15 @@ class Manager:
 				""" возвращает массив с запросами """
 				fins = self.ds.get_finances({'disabled =': 0})
 				# ============ TODO temporary solution ============ #
-				region_code = fins[0]["region_code"]
-				rate_category_code = fins[0]["rate_category_code"]
+				#region_code = fins[0]["region_code"]
+				#rate_category_code = fins[0]["rate_category_code"]
 
-				return [ HttpsRequestClient(self, params) for params in self.interface.get_request_params(0, region_code, rate_category_code, [ fin['curr_code'] for fin in fins ]) ]
+				return [ HttpsRequestClient(self, params) 
+					for params in (
+						self.interface.get_request_params(fin["fin_id"], fin["region_code"], fin["rate_category_code"], [fin["curr_code"]]) 
+							for fin in fins
+					) 
+				]
 				#return self.interface.get_request_params(0, region_code, rate_category_code, [ fin['curr_code'] for fin in fins ])
 				# ============ TODO temporary solution ============ #
 
@@ -33,7 +38,7 @@ class Manager:
 
 		def set_response_error(self, req_id, error):
 				""" регистрируется ошибка при выполнении запроса *не реализовано* TODO """
-				pass
+				raise Exception("Ошибка \"%s\" при выполении запроса %n" %  error, req_id)
 
 		def _save_rates(self, req_id, rate_data):
 				""" сохраняет полученные данные """

@@ -23,15 +23,13 @@ class Sbrf:
 
 	def get_request_params(self, req_id = 0, region_code = "038", rate_category_code = None, curr_codes = []):
 		""" получить структура запроса к серверу """
-		# ============ TODO temporary solution ============ #
 		region = "regionId=" + region_code
 		rate_category = "rateType=" + rate_category_code
-		return [{
+		return {
 			"id": req_id,
 			"host": self.host,
 			"url": self.base_url + "&".join( [region, rate_category] + [ "isoCodes[]=" + curr_code for curr_code in curr_codes ] ),
-			"port": self.port}]
-		# ============ TODO temporary solution ============ #
+			"port": self.port}
 
 	def decode_answer(self, req_id = None, data = {}):
 		""" декодирование ответа сервера в терминах текущей БД """
