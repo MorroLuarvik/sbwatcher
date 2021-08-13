@@ -32,9 +32,9 @@ class Manager:
 				#return self.interface.get_request_params(0, region_code, rate_category_code, [ fin['curr_code'] for fin in fins ])
 				# ============ TODO temporary solution ============ #
 
-		def set_response_data(self, req_id, data):
+		def set_response_data(self, request_params, data):
 				""" сохраняет данные для указанного запроса """
-				self._save_rates( req_id, self.interface.decode_answer(req_id, data) )
+				self._save_rates( request_params["id"], self.interface.decode_answer(request_params, data) )
 
 		def set_response_error(self, req_id, error):
 				""" регистрируется ошибка при выполнении запроса *не реализовано* TODO """

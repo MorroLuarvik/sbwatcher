@@ -13,7 +13,6 @@ for req in req_manager.get_requests():
 	try:
 		req.send_request()
 		response, error = req.get_response()
-		print(response)
 		if not error:
 			req.save_response_data(response)
 		else:
