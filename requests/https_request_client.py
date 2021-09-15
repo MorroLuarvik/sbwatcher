@@ -6,6 +6,7 @@ from .abstract_request_client import AbstractRequestClient
 
 import json
 import http.client
+import ssl
 
 class HttpsRequestClient(AbstractRequestClient):
 	""" Абстрактный класс отправки запросов """
@@ -20,7 +21,7 @@ class HttpsRequestClient(AbstractRequestClient):
 
 	def init(self):
 		""" Инициализация соединения """
-		self.connection = http.client.HTTPSConnection(self.request_params["host"], self.request_params["port"])
+		self.connection = http.client.HTTPSConnection(self.request_params["host"], self.request_params["port"], context = ssl._create_unverified_context())
 	
 	def send_request(self):
 		""" Отправка запроса объекта """
